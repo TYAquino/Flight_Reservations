@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assignment2.Components.Pages.Data
+namespace Assignment2.Models
 {
     internal class Reservation
     {

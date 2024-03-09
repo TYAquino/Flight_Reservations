@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Assignment2.Components.Pages.Data
+namespace Assignment2.Models
 {
     internal class Flight
     {
@@ -23,12 +23,11 @@ namespace Assignment2.Components.Pages.Data
 
         private string time;
 
-
         private int seats;
 
         private double costPerSeat;
 
-        //private bool isSelected;
+        private bool isSelected;
 
         public Flight(string code)
         {
@@ -92,7 +91,7 @@ namespace Assignment2.Components.Pages.Data
 
             if (!Regex.Match(code, "^[A-Z]{2}-\\d{4}$").Success)
             {
-                throw new Exception();//InvalidFlightCodeException
+                throw new Exception(); //InvalidFlightCodeException
             }
             string abbreviation = code.Substring(0, 2);
 
@@ -115,7 +114,7 @@ namespace Assignment2.Components.Pages.Data
                     break;
 
                 default:
-                    throw new Exception();//InvalidFlightCodeException
+                    throw new Exception(); //InvalidFlightCodeException
             }
         }
 

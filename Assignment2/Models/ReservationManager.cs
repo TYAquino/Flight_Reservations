@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assignment2.Components.Pages.Data
+namespace Assignment2.Models
 {
     internal class ReservationManager
     {
@@ -63,7 +63,7 @@ namespace Assignment2.Components.Pages.Data
          * @return Reservation code.
          */
         public string GenerateReservationCode()
-        {           
+        {
             string reservationCode;
 
             do
@@ -88,7 +88,7 @@ namespace Assignment2.Components.Pages.Data
             return existingCode.Contains(reservationCode);
         }
 
-        public static List<Reservation> GetReservations() 
+        public static List<Reservation> GetReservations()
         {
             List<Reservation> res = new List<Reservation>();
             foreach (string line in File.ReadLines(Reservation_TXT))
@@ -111,7 +111,7 @@ namespace Assignment2.Components.Pages.Data
 
         public void AddReservation(Reservation res)
         {
-            File.AppendAllText(Reservation_TXT, $"{res.Code},{res.FlightCode},{res.Airline},{res.Cost},{res.Name},{res.Citizenship},{res.Active}\n");            
+            File.AppendAllText(Reservation_TXT, $"{res.Code},{res.FlightCode},{res.Airline},{res.Cost},{res.Name},{res.Citizenship},{res.Active}\n");
         }
 
         public void UpdateReservation(Reservation res)

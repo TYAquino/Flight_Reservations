@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assignment2.Components.Pages.Data
+namespace Assignment2.Models
 {
     internal class FlightManager
     {
@@ -44,7 +44,7 @@ namespace Assignment2.Components.Pages.Data
         /**
         * The location of the flights text database file.
         */
-        public static string FLIGHTS_TEXT = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\..\..\Resources\Files\flights.csv");
+        public static string FLIGHTS_TEXT = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Resources\Files\flights.csv");
         /**
          * The location of the airports text database file.
          */
@@ -52,7 +52,7 @@ namespace Assignment2.Components.Pages.Data
         // TODO
         // define the airports file path  
         // ...................................
-        public static string AIRPORTS_TEXT = "";    // TODO (Update the path)
+        public static string AIRPORTS_TEXT = "";
 
         public static List<Flight> flights = new List<Flight>();
         public static List<string> airports = new List<string>();
@@ -127,9 +127,9 @@ namespace Assignment2.Components.Pages.Data
         {
             List<Flight> found = new List<Flight>();
 
-           // TODO
-           // find all flights that match the input arguments  
-           // ...................................
+            // TODO
+            // find all flights that match the input arguments  
+            // ...................................
 
             return found;
         }
@@ -204,6 +204,6 @@ namespace Assignment2.Components.Pages.Data
             catch (Exception e)
             {
             }
-        } 
+        }
     }
 }
