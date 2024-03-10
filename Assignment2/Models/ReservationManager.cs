@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.PortableExecutable;
@@ -11,11 +11,11 @@ namespace Assignment2.Models
     internal class ReservationManager
     {
 
-        
+
         private static string Reservation_TXT = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "wwwroot/Data/reservation.csv");
 
         private static Random random = new Random();
-       
+
         private static List<Reservation> reservations = new List<Reservation>();
 
         public List<Reservation> FindReservations(string reservationCode, string airline, string name)
@@ -32,12 +32,12 @@ namespace Assignment2.Models
                 {
                     found.Add(reservation);
                 }
-               
+
                 else if (reservation.Name.Contains(name))
                 {
                     found.Add(reservation);
                 }
-                
+
                 else if (reservation.Airline.Contains(airline))
                 {
                     found.Add(reservation);
@@ -52,7 +52,7 @@ namespace Assignment2.Models
             return GenerateReservationCode();
         }
 
-        
+
         public string GenerateReservationCode()
         {
             string reservationCode;
@@ -120,15 +120,13 @@ namespace Assignment2.Models
                 lines[index] = lines[index].Replace("Active", "Inactive");
                 File.WriteAllLines(Reservation_TXT, lines);
             }
-            
+
             else
             {
                 Console.WriteLine($"Reservation with flight number {res.FlightCode} not found.");
             }
 
             File.WriteAllLines(Reservation_TXT, lines);
-            }
         }
     }
-
-
+}
