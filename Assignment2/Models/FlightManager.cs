@@ -10,84 +10,50 @@ namespace Assignment2.Models
     {
         
         public static string WEEKDAY_ANY = "Any";
-        /**
-         * Used to search for flights on Sunday.
-         */
+       
         public static string WEEKDAY_SUNDAY = "Sunday";
-        /**
-         * Used to search for flights on Monday.
-         */
+        
         public static string WEEKDAY_MONDAY = "Monday";
-        /**
-         * Used to search for flights on Tuesday.
-         */
+        
         public static string WEEKDAY_TUESDAY = "Tuesday";
-        /**
-         * Used to search for flights on Wednesday.
-         */
+        
         public static string WEEKDAY_WEDNESDAY = "Wednesday";
-        /**
-         * Used to search for flights on Thursday.
-         */
+        
         public static string WEEKDAY_THURSDAY = "Thursday";
-        /**
-         * Used to search for flights on Friday.
-         */
+        
         public static string WEEKDAY_FRIDAY = "Friday";
-        /**
-         * Used to search for flights on Saturday.
-         */
+        
         public static string WEEKDAY_SATURDAY = "Saturday";
 
-        /**
-        * The location of the flights text database file.
-        */
+       //flight and airport database filepath
         public static string FLIGHTS_TEXT = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "wwwroot/Data/flights.csv");
-        /**
-         * The location of the airports text database file.
-         */
-        /* Example of absolute and relative path */
-        // TODO
-        // define the airports file path  
-        // ...................................
+       
         public static string AIRPORTS_TEXT = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "wwwroot/Data/airports.csv");
 
 
         public static List<Flight> flights = new List<Flight>();
         public static List<string> airports = new List<string>();
 
-        /**
-         * Default constructor for FlightManager.
-         */
+        //constructor FlightManager 
         public FlightManager()
         {
             populateAirports();
             populateFlights();
         }
 
-        /**
-         * Gets all of the airports.
-         * @return ArrayList of Airport objects.
-         */
+        //get airport List
         public List<string> getAirports()
         {
             return airports;
         }
 
-        /**
-         * Gets all of the flights.
-         * @return ArrayList of Flight objects.
-         */
+        //get flight list
         public static List<Flight> getFlights()
         {
             return flights;
         }
 
-        /**
-         * Finds an airport with code.
-         * @param code Airport code
-         * @return Airport object or null if none found.
-         */
+        //find an airport with code
         public string findAirportByCode(string code)
         {
             foreach (string airport in airports)
@@ -99,11 +65,7 @@ namespace Assignment2.Models
             return null;
         }
 
-        /**
-         * Finds a flight with code.
-         * @param code Flight code.
-         * @return Flight object or null if none found.
-         */
+        //find a flight with code
         public static Flight findFlightByCode(string code)
         {
             foreach (Flight flight in flights)
@@ -115,20 +77,11 @@ namespace Assignment2.Models
             return null;
         }
 
-        /**
-         * Finds flights going between airports on a specified weekday.
-         * @param from From airport code.
-         * @param to To airport code.
-         * @param weekday Day of week (one of WEEKDAY_* constants). Use WEEKDAY_ANY for any day of the week.
-         * @return Any found Flight objects.
-         */
+        //find flight airport on a specified weekday
         public static List<Flight> findFlights(string from, string to, string weekday)
         {
             List<Flight> found = new List<Flight>();
 
-            // TODO
-            // find all flights that match the input arguments
-            // ................................... 
             foreach (Flight flight in flights)
             {
                 if (flight.From.Equals(from) && flight.To.Equals(to) && (weekday.Equals(WEEKDAY_ANY) || flight.Weekday.Equals(weekday)))
@@ -139,9 +92,7 @@ namespace Assignment2.Models
             return found;
         }
 
-        /**
-         * Populates flights ArrayList with Flight objects from CSV file.
-         */
+        //populate flight arraylist
         private void populateFlights()
         {
             flights.Clear();
@@ -187,9 +138,7 @@ namespace Assignment2.Models
             }
         }
 
-        /**
-         * Populates airports with Airport objects from CSV file.
-         */
+        //populate airports with aorport objects from database CRV file
         private void populateAirports()
         {
             try
