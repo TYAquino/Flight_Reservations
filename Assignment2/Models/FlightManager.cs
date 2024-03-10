@@ -8,9 +8,7 @@ namespace Assignment2.Models
 {
     internal class FlightManager
     {
-        /**
-       * Used to search for flights on any day of the week.
-       */
+        
         public static string WEEKDAY_ANY = "Any";
         /**
          * Used to search for flights on Sunday.
@@ -44,7 +42,7 @@ namespace Assignment2.Models
         /**
         * The location of the flights text database file.
         */
-        public static string FLIGHTS_TEXT = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Resources\Files\flights.csv");
+        public static string FLIGHTS_TEXT = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "wwwroot/Data/flights.csv");
         /**
          * The location of the airports text database file.
          */
@@ -52,7 +50,8 @@ namespace Assignment2.Models
         // TODO
         // define the airports file path  
         // ...................................
-        public static string AIRPORTS_TEXT = "";
+        public static string AIRPORTS_TEXT = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "wwwroot/Data/airports.csv");
+
 
         public static List<Flight> flights = new List<Flight>();
         public static List<string> airports = new List<string>();
@@ -128,8 +127,15 @@ namespace Assignment2.Models
             List<Flight> found = new List<Flight>();
 
             // TODO
-            // find all flights that match the input arguments  
+            // find all flights that match the input arguments
             // ...................................
+            foreach (Flight flight in flights)
+            {
+                if (flight.From.Equals(from) && flight.To.Equals(to) && (weekday.Equals(WEEKDAY_ANY) || flight.Weekday.Equals(weekday)))
+                {
+                    found.Add(flight);
+                }
+            }
 
             return found;
         }
@@ -164,7 +170,7 @@ namespace Assignment2.Models
 
                     try
                     {
-                        flight = new Flight(code, airline, fromAirport, toAirport, weekday, time, seatsAvailable, pricePerSeat);
+                         flight = new Flight(code, airline, fromAirport, toAirport, weekday, time, seatsAvailable, pricePerSeat);
 
                         flights.Add(flight);
                     }
