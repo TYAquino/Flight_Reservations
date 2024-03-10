@@ -44,7 +44,11 @@ namespace Assignment2.Models
                     found.Add(reservation);
                 }
                 // TODO
-                // add a case to get reservation by Name   
+                // add a case to get reservation by Name
+                else if (reservation.Name.Contains(name))
+                {
+                    found.Add(reservation);
+                }
                 // add a case to get reservation by Airline   
                 // ...................................
             }
