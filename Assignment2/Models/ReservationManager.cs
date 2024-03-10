@@ -113,13 +113,19 @@ namespace Assignment2.Models
             // Add code to change the status from Active to Cancelled for the selected flight
             // and update the record in the reservation.csv file  
             // ...................................
-            for (int i = 0; i < lines.Count; i++)
+            int index = lines.FindIndex(line => line.Split(',')[0] == res.FlightCode);
+
+            if (index != -1)
             {
-                string[] lineArray = lines[i].Split(",");
-                if (lineArray[0] == res.Code) 
-                {
-                lines[i] = lines[i].Replace("Active", "Cancelled").ToString();
-                }   
+                lines[index] = lines[index].Replace("Active", "Inactive");
+                File.WriteAllLines(Reservation_TXT, lines);
+            }
+            
+            else
+            {
+                Console.WriteLine($"Reservation with flight number {res.FlightCode} not found.");
+            }
+
             File.WriteAllLines(Reservation_TXT, lines);
             }
         }
