@@ -53,6 +53,7 @@ namespace Assignment2.Models
                 else if (reservation.Airline.Contains(airline))
                 {
                     found.Add(reservations);
+                }
                 // ...................................
             }
 
