@@ -128,7 +128,7 @@ namespace Assignment2.Models
 
             // TODO
             // find all flights that match the input arguments
-            // ...................................
+            // ................................... 
             foreach (Flight flight in flights)
             {
                 if (flight.From.Equals(from) && flight.To.Equals(to) && (weekday.Equals(WEEKDAY_ANY) || flight.Weekday.Equals(weekday)))
@@ -136,7 +136,6 @@ namespace Assignment2.Models
                     found.Add(flight);
                 }
             }
-
             return found;
         }
 

@@ -14,7 +14,7 @@ namespace Assignment2.Models
         /**
          * The location of the reservation file.
          */
-        private static string Reservation_TXT = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\..\..\Resources\Files\reservation.csv");
+        private static string Reservation_TXT = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "wwwroot/Data/reservation.csv");
 
         private static Random random = new Random();
         /**
