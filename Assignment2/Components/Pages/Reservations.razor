@@ -210,35 +210,35 @@
         resNew.Clear();
         Reservation NewReservation;
 
-        if ((inputResCode != "") && (inputAirline != "") && (inputName != ""))
+        if ((inputResCode != "") && (inputResCode != null) && (inputAirline != "") && (inputAirline != null) && (inputName != "") && (inputName != null))
         {
-            foreach (var res in reservations)
-            {
-                if (((inputResCode != "") && (inputResCode.ToUpper() == res.Code.ToUpper())) &&
-                    ((inputAirline != "") && (inputAirline.ToUpper() == res.Airline.ToUpper())) &&
-                    ((inputName != "") && (inputName.ToUpper() == res.Name.ToUpper())))
-                {
-                    NewReservation = new Reservation(res.Code, res.FlightCode, res.Airline, res.Cost, res.Name, res.Citizenship, res.Active);
-                    resNew.Add(NewReservation);
-                }
-                // TODO
-                // add other cases to be able to find flight by code and/or name and/or airline
-                else if ((inputResCode != "") && (inputResCode.ToUpper() == res.Code.ToUpper()))
-                {
-                    NewReservation = new Reservation(res.Code, res.FlightCode, res.Airline, res.Cost, res.Name, res.Citizenship, res.Active);
-                    resNew.Add(NewReservation);
-                }
-                else if ((inputAirline != "") && (inputAirline.ToUpper() == res.Code.ToUpper()))
-                {
-                    NewReservation = new Reservation(res.Code, res.FlightCode, res.Airline, res.Cost, res.Name, res.Citizenship, res.Active);
-                    resNew.Add(NewReservation);
-                }
-                else if ((inputName != "") && (inputName.ToUpper() == res.Code.ToUpper()))
-                {
-                    NewReservation = new Reservation(res.Code, res.FlightCode, res.Airline, res.Cost, res.Name, res.Citizenship, res.Active);
-                    resNew.Add(NewReservation);
-                }
-            }
+          foreach (var res in reservations)
+          {
+              if (((inputResCode != null) && (inputResCode.ToUpper() == res.Code.ToUpper())) &&
+                  ((inputAirline != null) && (inputAirline.ToUpper() == res.Airline.ToUpper())) &&
+                  ((inputName != null) && (inputName.ToUpper() == res.Name.ToUpper())))
+              {
+                  NewReservation = new Reservation(res.Code, res.FlightCode, res.Airline, res.Cost, res.Name, res.Citizenship, res.Active);
+                  resNew.Add(NewReservation);
+              }
+              // TODO
+              // add other cases to be able to find flight by code and/or name and/or airline
+              else if ((inputResCode != null) && (inputResCode.ToUpper() == res.Code.ToUpper()))
+              {
+                  NewReservation = new Reservation(res.Code, res.FlightCode, res.Airline, res.Cost, res.Name, res.Citizenship, res.Active);
+                  resNew.Add(NewReservation);
+              }
+              else if ((inputAirline != null) && (inputAirline.ToUpper() == res.Code.ToUpper()))
+              {
+                  NewReservation = new Reservation(res.Code, res.FlightCode, res.Airline, res.Cost, res.Name, res.Citizenship, res.Active);
+                  resNew.Add(NewReservation);
+              }
+              else if ((inputName != null) && (inputName.ToUpper() == res.Code.ToUpper()))
+              {
+                  NewReservation = new Reservation(res.Code, res.FlightCode, res.Airline, res.Cost, res.Name, res.Citizenship, res.Active);
+                  resNew.Add(NewReservation);
+              }
+          }
         }
         else
         {
