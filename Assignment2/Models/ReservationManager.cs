@@ -132,16 +132,11 @@ namespace Assignment2.Models
             // ...................................
             for (int i = 0; i < lines.Count; i++)
             {
-                string[] parts = lines[i].Split(",");
-                if (parts[0] == res.Code) // Assuming the first part is the reservation code
+                string[] lineArray = lines[i].Split(",");
+                if (lineArray[0] == res.Code) 
                 {
-                    // Update the status to "Cancelled"
-                    parts[6] = "Cancelled"; // Assuming the status is in the 7th position
-                                            // Reconstruct the line
-                    lines[i] = string.Join(",", parts);
-                    // Break the loop as we found the reservation to update
-                    break;
-    }
+                lines[i] = line[i].Replace("Active", "Cancelled").ToString();
+                }   
             File.WriteAllLines(Reservation_TXT, lines);
         }
     }
