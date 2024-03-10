@@ -11,24 +11,13 @@ namespace Assignment2.Models
     internal class ReservationManager
     {
 
-        /**
-         * The location of the reservation file.
-         */
+        
         private static string Reservation_TXT = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "wwwroot/Data/reservation.csv");
 
         private static Random random = new Random();
-        /**
-         * Holds the Reservation objects.
-         */
+       
         private static List<Reservation> reservations = new List<Reservation>();
 
-        /**
-         * Finds reservations containing either reservation code or airline.
-         * @param reservationCode Reservation code to search for.
-         * @param airline Airline to search for.
-         * @param name Travelers name to search for.
-         * @return Any matching Reservation objects.
-         */
         public List<Reservation> FindReservations(string reservationCode, string airline, string name)
         {
             List<Reservation> found = new List<Reservation>();
@@ -43,18 +32,16 @@ namespace Assignment2.Models
                 {
                     found.Add(reservation);
                 }
-                // TODO
-                // add a case to get reservation by Name
+               
                 else if (reservation.Name.Contains(name))
                 {
                     found.Add(reservation);
                 }
-                // add a case to get reservation by Airline 
+                
                 else if (reservation.Airline.Contains(airline))
                 {
                     found.Add(reservation);
                 }
-                // ...................................
             }
 
             return found;
@@ -65,11 +52,7 @@ namespace Assignment2.Models
             return GenerateReservationCode();
         }
 
-        /**
-         * Gets reservation code using a flight.
-         * @param flight Flight instance.
-         * @return Reservation code.
-         */
+        
         public string GenerateReservationCode()
         {
             string reservationCode;
@@ -135,9 +118,11 @@ namespace Assignment2.Models
                 string[] lineArray = lines[i].Split(",");
                 if (lineArray[0] == res.Code) 
                 {
-                lines[i] = line[i].Replace("Active", "Cancelled").ToString();
+                lines[i] = lines[i].Replace("Active", "Cancelled").ToString();
                 }   
             File.WriteAllLines(Reservation_TXT, lines);
+            }
         }
     }
 }
+
