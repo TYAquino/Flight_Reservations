@@ -67,6 +67,7 @@
     <ItemGroup>
       <None Include="wwwroot\Data\airports.csv" />
       <None Include="wwwroot\Data\flights.csv" />
+      <None Include="wwwroot\Data\reservation.csv" />
     </ItemGroup>
 
 </Project>
