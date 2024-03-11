@@ -49,7 +49,7 @@ namespace Assignment2.Models
         public double Cost { get => cost; set => cost = value; }
         public string Active { get => active; set => active = value; }
 
-        public void SetName(string name)// throws InvalidNameException
+        public void SetName(string name)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -58,11 +58,11 @@ namespace Assignment2.Models
 
             this.name = name;
         }
-        public void setCitizenship(string citizenship) //throws InvalidCitizenshipException
+        public void setCitizenship(string citizenship) 
         {
             if (string.IsNullOrEmpty(citizenship))
             {
-                throw new Exception();//InvalidCitizenshipException
+                throw new Exception();
             }
 
             this.citizenship = citizenship;
@@ -70,7 +70,6 @@ namespace Assignment2.Models
 
         public string toString()
         {
-            // return this.Code;
             return $"{Code}, {FlightCode}, {Airline}, {Cost}, {Name}, {Citizenship}, {Active}";
 
         }
