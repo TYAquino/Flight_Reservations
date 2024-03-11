@@ -109,10 +109,6 @@ namespace Assignment2.Models
         {
             var lines = File.ReadAllLines(Reservation_TXT).ToList();
 
-            // TODO
-            // Add code to change the status from Active to Cancelled for the selected flight
-            // and update the record in the reservation.csv file  
-            // ...................................
             int index = lines.FindIndex(line => line.Split(',')[0] == res.Code);
 
             if (index != -1)
