@@ -86,12 +86,12 @@ namespace Assignment2.Models
             return Code;
         }
 
-        private void ParseCode(string code) //throws InvalidFlightCodeException
+        private void ParseCode(string code)
         {
 
             if (!Regex.Match(code, "^[A-Z]{2}-\\d{4}$").Success)
             {
-                throw new Exception(); //InvalidFlightCodeException
+                throw new Exception(); 
             }
             string abbreviation = code.Substring(0, 2);
 
@@ -114,7 +114,7 @@ namespace Assignment2.Models
                     break;
 
                 default:
-                    throw new Exception(); //InvalidFlightCodeException
+                    throw new Exception();
             }
         }
 
