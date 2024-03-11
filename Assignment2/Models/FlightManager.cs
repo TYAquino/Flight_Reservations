@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 namespace Assignment2.Models
 {
     internal class FlightManager
-    {
-        
+    {        
         public static string WEEKDAY_ANY = "Any";
        
         public static string WEEKDAY_SUNDAY = "Sunday";
