@@ -8,7 +8,6 @@
         box-sizing: border-box;
     }
 
-    /* Create two equal columns that floats next to each other */
     .column {
         float: left;
         width: 50%;
@@ -16,7 +15,6 @@
         height: 350px;
     }
 
-    /* Clear floats after the columns */
     .row:after {
         content: "";
         display: table;
@@ -43,7 +41,6 @@
         display: inline-block;
         box-sizing: border-box;
     }
-
 
     .container {
         position: relative;
@@ -281,7 +278,6 @@
         newcostPerSeat = flight.CostPerSeat;       
     }
 
-    //This function creates the reservation and adds it in the csv file.
     private void CallMakeReservation()
     {
         ClearErrorMessage();
@@ -305,7 +301,6 @@
         }
     }
 
-    //Clears the error message on the alert box
     private void ClearErrorMessage()
     {
         errorMessage = "";
