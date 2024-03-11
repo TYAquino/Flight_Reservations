@@ -11,7 +11,6 @@ namespace Assignment2.Models
     internal class ReservationManager
     {
 
-
         private static string Reservation_TXT = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "wwwroot/Data/reservation.csv");
 
         private static Random random = new Random();
@@ -52,11 +51,9 @@ namespace Assignment2.Models
             return GenerateReservationCode();
         }
 
-
         public string GenerateReservationCode()
         {
             string reservationCode;
-
             do
             {
                 char letter = (char)('A' + random.Next(26));
