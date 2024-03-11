@@ -24,8 +24,7 @@ namespace Assignment2.Models
         public static string WEEKDAY_FRIDAY = "Friday";
         
         public static string WEEKDAY_SATURDAY = "Saturday";
-
-       //flight and airport database filepath
+        
         public static string FLIGHTS_TEXT = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "wwwroot/Data/flights.csv");
        
         public static string AIRPORTS_TEXT = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "wwwroot/Data/airports.csv");
@@ -34,26 +33,22 @@ namespace Assignment2.Models
         public static List<Flight> flights = new List<Flight>();
         public static List<string> airports = new List<string>();
 
-        //constructor FlightManager 
         public FlightManager()
         {
             populateAirports();
             populateFlights();
         }
-
-        //get airport List
+        
         public List<string> getAirports()
         {
             return airports;
         }
 
-        //get flight list
         public static List<Flight> getFlights()
         {
             return flights;
         }
 
-        //find an airport with code
         public string findAirportByCode(string code)
         {
             foreach (string airport in airports)
@@ -65,7 +60,6 @@ namespace Assignment2.Models
             return null;
         }
 
-        //find a flight with code
         public static Flight findFlightByCode(string code)
         {
             foreach (Flight flight in flights)
@@ -77,7 +71,6 @@ namespace Assignment2.Models
             return null;
         }
 
-        //find flight airport on a specified weekday
         public static List<Flight> findFlights(string from, string to, string weekday)
         {
             List<Flight> found = new List<Flight>();
@@ -92,7 +85,6 @@ namespace Assignment2.Models
             return found;
         }
 
-        //populate flight arraylist
         private void populateFlights()
         {
             flights.Clear();
@@ -100,7 +92,6 @@ namespace Assignment2.Models
             {
                 int counter = 0;
                 Flight flight;
-                // Read the file and display it line by line.  
                 foreach (string line in File.ReadLines(FLIGHTS_TEXT))
                 {
                     Console.WriteLine(line);
@@ -124,7 +115,7 @@ namespace Assignment2.Models
 
                         flights.Add(flight);
                     }
-                    catch (Exception e)//InvalidFlightCodeException
+                    catch (Exception e)
                     {
 
                     }
@@ -138,7 +129,6 @@ namespace Assignment2.Models
             }
         }
 
-        //populate airports with aorport objects from database CRV file
         private void populateAirports()
         {
             try
