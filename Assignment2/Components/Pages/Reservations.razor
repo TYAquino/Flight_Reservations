@@ -9,7 +9,6 @@
         box-sizing: border-box;
     }
 
-    /* Create two equal columns that floats next to each other */
     .column {
         float: left;
         width: 50%;
@@ -17,7 +16,6 @@
         height: 350px;
     }
 
-    /* Clear floats after the columns */
     .row:after {
         content: "";
         display: table;
@@ -188,10 +186,6 @@
         currentReservation = resNew.FirstOrDefault(r => r.Code == e.Value.ToString());
     }
 
-    /*This is the method called after the "Find Flights" button is clicked.
-     * It will find reserved flights from reservation.csv file according to
-     * user inputs of reservation code and/or airline and/or name.
-    */
     private void SearchReservations()
     {
         reservations = ReservationManager.GetReservations();
@@ -208,10 +202,7 @@
                 {
                     NewReservation = new Reservation(res.Code, res.FlightCode, res.Airline, res.Cost, res.Name, res.Citizenship, res.Active);
                     resNew.Add(NewReservation);
-                }
-                // TODO
-                // add other cases to be able to find flight by code and/or name and/or airline              
-
+                }        
                 else if ((inputResCode != null) && (inputResCode.ToUpper() == res.Code.ToUpper()))
                 {
                     NewReservation = new Reservation(res.Code, res.FlightCode, res.Airline, res.Cost, res.Name, res.Citizenship, res.Active);
@@ -234,10 +225,7 @@
             resNew = reservations;
         }
     }
-    /*This is the method called after the "Find Flights" button is clicked.
-    * It will find reserved flights from reservation.csv file according to
-    * user inputs of reservation code and/or airline and/or name.
-    */
+
     private void SaveReservations()
     {
         var reservationToSave = resNew.FirstOrDefault(r => r.Code == currentReservation.Code);
