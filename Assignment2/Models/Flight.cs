@@ -43,7 +43,6 @@ namespace Assignment2.Models
             this.time = time;
             this.seats = seats;
             this.costPerSeat = costPerSeat;
-
         }
 
         public string Code { get => code; set => code = value; }
