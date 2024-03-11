@@ -109,28 +109,15 @@
         <div class="row">
             <div class="col-sm-3">
                 <label for="explicit-label-name">Code: </label>
-                <input class="form-control" type="text" id="code" name="Code" @bind="inputResCode">
+                <input class="form-control" type="text" id="code" name="Code" @bind="@inputResCode">
             </div>
             <div class="col-sm-3">
                 <label for="explicit-label-name">Airline: </label>
-                <input class="form-control" type="text" id="code" name="Airline" @bind="inputAirline">
-                @*<select class="form-control" @bind="newAirline">
-                    @if (airlines == null)
-                    {
-                        <option>Loading...</option>
-                    }
-                    else
-                    {
-                        @foreach (var a in airlines)
-                        {
-                            <option value="@a">@a</option>
-                        }
-                    }
-                </select>*@
+                <input class="form-control" type="text" id="code" name="Airline" @bind="@inputAirline">
             </div>
             <div class="col-sm-3">
                 <label for="explicit-label-name">Name: </label>
-                <input class="form-control" type="text" id="code" name="Name" @bind="inputName">
+                <input class="form-control" type="text" id="code" name="Name" @bind="@inputName">
             </div>
             <div class="col-sm-3">
                 <label for="explicit-label-name"> </label>
@@ -145,7 +132,7 @@
         <div class="row">
             <h2 class="text-center p-2">Reservations</h2>
         </div>
-        <select class="form-control" onfocus="this.selectedIndex = -1;" @bind="currentReservation">
+        <select class="form-control" onfocus="this.selectedIndex = -1;" @onchange="@changeReservation">
             @if (resNew.Count() == 0)
             {
                 <option>Select your reservation from this list</option>
@@ -167,13 +154,13 @@
             <h2 class="text-center p-2">Reserve</h2>
         </div>
         <div>
-            <label>Reservation Code:</label><input class="form-control" type="text" placeholder="Reservation Code" value="@inputResCode" />
-            <label>Flight Code:</label><input class="form-control" type="text" placeholder="Flight Code" value="@inputflightCode" />
-            <label>Airline:</label><input class="form-control" type="text" placeholder="Airline" value="@inputAirline" />
-            <label>Cost:</label><input class="form-control" type="text" placeholder="Cost" value="@inputCost" />
-            <label>Name:</label><input class="form-control" type="text" placeholder="Name" @bind="inputName" />
-            <label>Citizenship:</label><input class="form-control" type="text" placeholder="Citizenship" @bind="inputCitizenship" />
-            <label>Status:</label><input class="form-control" type="text" placeholder="Status" @bind="inputStatus" />
+            <label>Reservation Code:</label><input class="form-control" type="text" placeholder="Reservation Code" @bind="@currentReservation.Code" readonly />
+            <label>Flight Code:</label><input class="form-control" type="text" placeholder="Flight Code" @bind="@currentReservation.FlightCode" readonly />
+            <label>Airline:</label><input class="form-control" type="text" placeholder="Airline" @bind="@currentReservation.Airline" readonly />
+            <label>Cost:</label><input class="form-control" type="text" placeholder="Cost" @bind="@currentReservation.Cost" readonly />
+            <label>Name:</label><input class="form-control" type="text" placeholder="Name" @bind="@currentReservation.Name" />
+            <label>Citizenship:</label><input class="form-control" type="text" placeholder="Citizenship" @bind="@currentReservation.Citizenship" />
+            <label>Status:</label><input class="form-control" type="text" placeholder="Status" @bind="@currentReservation.Active" />
         </div>
         <br />
 
@@ -188,17 +175,18 @@
 
 @code {
     string inputResCode;
-    string inputflightCode;
     string inputAirline;
-    string inputName = "";
-    string inputCost;
-    string inputCitizenship = "";
-    string inputStatus = "";
-    string currentReservation;
+    string inputName;
+    Reservation currentReservation = new Reservation();
 
     ReservationManager rm = new ReservationManager();
     List<Reservation> reservations;
     List<Reservation> resNew = new List<Reservation>();
+
+    private void changeReservation(ChangeEventArgs e)
+    {
+        currentReservation = resNew.FirstOrDefault(r => r.Code == e.Value.ToString());
+    }
 
     /*This is the method called after the "Find Flights" button is clicked.
      * It will find reserved flights from reservation.csv file according to
@@ -210,35 +198,36 @@
         resNew.Clear();
         Reservation NewReservation;
 
-        if ((inputResCode != "") && (inputResCode != null) && (inputAirline != "") && (inputAirline != null) && (inputName != "") && (inputName != null))
+        if (!String.IsNullOrEmpty(inputResCode) || !String.IsNullOrEmpty(inputAirline) || !String.IsNullOrEmpty(inputName))
         {
-          foreach (var res in reservations)
-          {
-              if (((inputResCode != null) && (inputResCode.ToUpper() == res.Code.ToUpper())) &&
-                  ((inputAirline != null) && (inputAirline.ToUpper() == res.Airline.ToUpper())) &&
-                  ((inputName != null) && (inputName.ToUpper() == res.Name.ToUpper())))
-              {
-                  NewReservation = new Reservation(res.Code, res.FlightCode, res.Airline, res.Cost, res.Name, res.Citizenship, res.Active);
-                  resNew.Add(NewReservation);
-              }
-              // TODO
-              // add other cases to be able to find flight by code and/or name and/or airline
-              else if ((inputResCode != null) && (inputResCode.ToUpper() == res.Code.ToUpper()))
-              {
-                  NewReservation = new Reservation(res.Code, res.FlightCode, res.Airline, res.Cost, res.Name, res.Citizenship, res.Active);
-                  resNew.Add(NewReservation);
-              }
-              else if ((inputAirline != null) && (inputAirline.ToUpper() == res.Code.ToUpper()))
-              {
-                  NewReservation = new Reservation(res.Code, res.FlightCode, res.Airline, res.Cost, res.Name, res.Citizenship, res.Active);
-                  resNew.Add(NewReservation);
-              }
-              else if ((inputName != null) && (inputName.ToUpper() == res.Code.ToUpper()))
-              {
-                  NewReservation = new Reservation(res.Code, res.FlightCode, res.Airline, res.Cost, res.Name, res.Citizenship, res.Active);
-                  resNew.Add(NewReservation);
-              }
-          }
+            foreach (var res in reservations)
+            {
+                if (((inputResCode != null) && (inputResCode.ToUpper() == res.Code.ToUpper())) &&
+                    ((inputAirline != null) && (inputAirline.ToUpper() == res.Airline.ToUpper())) &&
+                    ((inputName != null) && (inputName.ToUpper() == res.Name.ToUpper())))
+                {
+                    NewReservation = new Reservation(res.Code, res.FlightCode, res.Airline, res.Cost, res.Name, res.Citizenship, res.Active);
+                    resNew.Add(NewReservation);
+                }
+                // TODO
+                // add other cases to be able to find flight by code and/or name and/or airline              
+
+                else if ((inputResCode != null) && (inputResCode.ToUpper() == res.Code.ToUpper()))
+                {
+                    NewReservation = new Reservation(res.Code, res.FlightCode, res.Airline, res.Cost, res.Name, res.Citizenship, res.Active);
+                    resNew.Add(NewReservation);
+                }
+                else if ((inputAirline != null) && (inputAirline.ToUpper() == res.Airline.ToUpper()))
+                {
+                    NewReservation = new Reservation(res.Code, res.FlightCode, res.Airline, res.Cost, res.Name, res.Citizenship, res.Active);
+                    resNew.Add(NewReservation);
+                }
+                else if ((inputName != null) && (inputName.ToUpper() == res.Name.ToUpper()))
+                {
+                    NewReservation = new Reservation(res.Code, res.FlightCode, res.Airline, res.Cost, res.Name, res.Citizenship, res.Active);
+                    resNew.Add(NewReservation);
+                }
+            }
         }
         else
         {
@@ -251,39 +240,12 @@
     */
     private void SaveReservations()
     {
-        var reservationToSave = reservations.FirstOrDefault(r => r.Code == currentReservation);
+        var reservationToSave = resNew.FirstOrDefault(r => r.Code == currentReservation.Code);
 
         if (reservationToSave != null)
         {
-            reservationToSave.Name = inputName;
-            reservationToSave.Citizenship = inputCitizenship;
-
-            Reservation SavedReservations = new Reservation(reservationToSave.Code, reservationToSave.FlightCode, reservationToSave.Airline, reservationToSave.Cost, reservationToSave.Name, reservationToSave.Citizenship, reservationToSave.Active);
-            resNew.Add(SavedReservations);
-
-        }
-
-        foreach (var res in reservations)
-        {
-            if (currentReservation == res.Code)
-            {
-                rm.UpdateReservation(res);
-                break;
-            }                
-        }
-
-        reservations.Clear();
-        reservations = ReservationManager.GetReservations();
-        Reservation savedReservation = new Reservation();
-        resNew.Clear();
-        foreach (var res in reservations)
-        {
-            if (currentReservation.ToUpper() == res.Code.ToUpper())             
-            {
-                savedReservation = new Reservation(res.Code, res.FlightCode, res.Airline, res.Cost, res.Name, res.Citizenship, res.Active);
-                resNew.Add(savedReservation);
-                break;
-            }          
+            rm.UpdateReservation(reservationToSave);
+            SearchReservations();
         }
     }
 }
